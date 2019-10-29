@@ -1,0 +1,23 @@
+18:10:42 **** Incremental Build of configuration Debug for project 01_blink ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+D:\STM32SW_workspace\01_blink\Debug
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F042x6 -I"D:/STM32SW_workspace/01_blink/Inc" -I"D:/STM32SW_workspace/01_blink/Drivers/STM32F0xx_HAL_Driver/Inc" -I"D:/STM32SW_workspace/01_blink/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy" -I"D:/STM32SW_workspace/01_blink/Drivers/CMSIS/Device/ST/STM32F0xx/Include" -I"D:/STM32SW_workspace/01_blink/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+Finished building: ../Src/main.c
+ 
+Building target: 01_blink.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -specs=nosys.specs -specs=nano.specs -T"../STM32F042K6Tx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "01_blink.elf" @"objects.list"   -lm
+Finished building target: 01_blink.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "01_blink.elf" "01_blink.hex"
+arm-none-eabi-size "01_blink.elf"
+   text	   data	    bss	    dec	    hex	filename
+   3768	     12	   1572	   5352	   14e8	01_blink.elf
+ 
+
+18:10:43 Build Finished (took 1s.650ms)
+

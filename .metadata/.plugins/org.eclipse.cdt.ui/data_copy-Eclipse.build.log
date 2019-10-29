@@ -1,0 +1,6 @@
+13:48:04 **** Incremental Build of configuration Debug for project data_copy-Eclipse ****
+make -j4 all 
+make: Nothing to be done for 'all'.
+
+13:48:04 Build Finished (took 424ms)
+

@@ -1,0 +1,4 @@
+"drivers/src/stm32f411xx_gpio_driver.o"
+"src/001_led_toggle.o"
+"startup/startup_stm32.o"
+"startup/sysmem.o"

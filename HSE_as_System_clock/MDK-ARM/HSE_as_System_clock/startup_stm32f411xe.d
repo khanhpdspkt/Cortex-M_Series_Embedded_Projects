@@ -1,0 +1,1 @@
+hse_as_system_clock\startup_stm32f411xe.o: startup_stm32f411xe.s

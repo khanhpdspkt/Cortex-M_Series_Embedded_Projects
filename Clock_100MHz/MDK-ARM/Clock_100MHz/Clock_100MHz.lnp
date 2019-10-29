@@ -1,0 +1,25 @@
+--cpu=Cortex-M4.fp
+"clock_100mhz\startup_stm32f411xe.o"
+"clock_100mhz\main.o"
+"clock_100mhz\stm32f4xx_it.o"
+"clock_100mhz\stm32f4xx_hal_msp.o"
+"clock_100mhz\stm32f4xx_hal_tim.o"
+"clock_100mhz\stm32f4xx_hal_tim_ex.o"
+"clock_100mhz\stm32f4xx_hal_rcc.o"
+"clock_100mhz\stm32f4xx_hal_rcc_ex.o"
+"clock_100mhz\stm32f4xx_hal_flash.o"
+"clock_100mhz\stm32f4xx_hal_flash_ex.o"
+"clock_100mhz\stm32f4xx_hal_flash_ramfunc.o"
+"clock_100mhz\stm32f4xx_hal_gpio.o"
+"clock_100mhz\stm32f4xx_hal_dma_ex.o"
+"clock_100mhz\stm32f4xx_hal_dma.o"
+"clock_100mhz\stm32f4xx_hal_pwr.o"
+"clock_100mhz\stm32f4xx_hal_pwr_ex.o"
+"clock_100mhz\stm32f4xx_hal_cortex.o"
+"clock_100mhz\stm32f4xx_hal.o"
+"clock_100mhz\stm32f4xx_hal_exti.o"
+"clock_100mhz\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "Clock_100MHz\Clock_100MHz.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Clock_100MHz.map" -o Clock_100MHz\Clock_100MHz.axf

@@ -1,0 +1,26 @@
+--cpu=Cortex-M4.fp
+"hse_as_system_clock\startup_stm32f411xe.o"
+"hse_as_system_clock\startup_stm32f411xe_1.o"
+"hse_as_system_clock\system_stm32f4xx.o"
+"hse_as_system_clock\main.o"
+"hse_as_system_clock\stm32f4xx_it.o"
+"hse_as_system_clock\stm32f4xx_hal_msp.o"
+"hse_as_system_clock\stm32f4xx_hal_tim.o"
+"hse_as_system_clock\stm32f4xx_hal_tim_ex.o"
+"hse_as_system_clock\stm32f4xx_hal_rcc.o"
+"hse_as_system_clock\stm32f4xx_hal_rcc_ex.o"
+"hse_as_system_clock\stm32f4xx_hal_flash.o"
+"hse_as_system_clock\stm32f4xx_hal_flash_ex.o"
+"hse_as_system_clock\stm32f4xx_hal_flash_ramfunc.o"
+"hse_as_system_clock\stm32f4xx_hal_gpio.o"
+"hse_as_system_clock\stm32f4xx_hal_dma_ex.o"
+"hse_as_system_clock\stm32f4xx_hal_dma.o"
+"hse_as_system_clock\stm32f4xx_hal_pwr.o"
+"hse_as_system_clock\stm32f4xx_hal_pwr_ex.o"
+"hse_as_system_clock\stm32f4xx_hal_cortex.o"
+"hse_as_system_clock\stm32f4xx_hal.o"
+"hse_as_system_clock\stm32f4xx_hal_exti.o"
+--library_type=microlib --strict --scatter "HSE_as_System_clock\HSE_as_System_clock.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "HSE_as_System_clock.map" -o HSE_as_System_clock\HSE_as_System_clock.axf
