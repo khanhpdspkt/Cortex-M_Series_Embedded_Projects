@@ -425,6 +425,25 @@ void SysTick_Handler(void) {
 
 ![](https://i.imgur.com/C653v8C.png)
 
+## Signal Generation via Octive
+
+* Generate 10 Hz sin wave for 3 sec
+* Save as txt file
+
+```m
+f = 10; # 10Hz
+Amp = 1;
+ts = 1/100;
+T = 3;
+t = 0:ts:T;
+y = Amp*sin(2*pi*f*t);
+
+csvwrite('_10hz_signal.txt', y);
+```
+
+
+
+
 ## Reference
 
 * http://www.keil.com/pack/doc/cmsis/DSP/html/group__FIR.html
