@@ -71,8 +71,8 @@ int main() {
 
 
 void SysTick_Handler(void) {
-	HAL_IncTick();
-	HAL_SYSTICK_IRQHandler();
+    HAL_IncTick();
+    HAL_SYSTICK_IRQHandler();
 }
 
 // thread handlers
@@ -128,3 +128,6 @@ void sync_thread(void const *argument) {
 	}
 
 }
+
+
+
