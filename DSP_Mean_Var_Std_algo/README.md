@@ -6,30 +6,34 @@
 <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
 -->
 
-<!-- <img src="https://render.githubusercontent.com/render/math?math=\mu = \frac{1}{N}\sum^{N-1}_{i=0}x_i = \frac{x_0 + x_1 + \dots + x_{N-1}}{N}">
+<!-- 
 
-<img src="https://latex.codecogs.com/jpg.latex?\mu = \frac{1}{N}\sum^{N-1}_{i=0}x_i = \frac{x_0 + x_1 + \dots + x_{N-1}}{N}" />  -->
+<img src="https://render.githubusercontent.com/render/math?math=\LARGE XXX" />
+
+-->
+
+
 
 ## Mean and Standard Deviation
 
 * Mead 平均數
-    * <img src="https://render.githubusercontent.com/render/math?math=\mu = \frac{1}{N}\sum^{N-1}_{i=0}x_i = \frac{x_0 + x_1 + \dots + x_{N-1}}{N}">
+    * <img src="https://render.githubusercontent.com/render/math?math=\LARGE  \mu = \frac{1}{N}\sum^{N-1}_{i=0}x_i = \frac{x_0 + x_1 + \dots + x_{N-1}}{N}">
     * 物理意義: DC signal (Direct current) 直流分量
 * Deviation
-    * <img src="https://latex.codecogs.com/gif.latex?i" />  deviates from the mean: <img src="https://latex.codecogs.com/gif.latex?|x_i - \mu|" /> 
-    * Average deviation: <img src="https://latex.codecogs.com/gif.latex?\frac{1}{N-1}\sum^{N-1}_{i=0}|x_i - \mu|" /> 
+    * <img src="https://render.githubusercontent.com/render/math?math=\large i" />  deviates from the mean: <img src="https://render.githubusercontent.com/render/math?math=\large |x_i - \mu|" /> 
+    * Average deviation: <img src="https://render.githubusercontent.com/render/math?math=\LARGE \frac{1}{N-1}\sum^{N-1}_{i=0}|x_i - \mu|" /> 
     * 物理意義: 訊號樣本點與平均之距離
 * Standard Deviation 標準差
-    * <img src="https://latex.codecogs.com/gif.latex?{\color{Red} P} \propto {\color{Orange} V^{{\color{Orange}2}}}" /> 
-    * <img src="https://latex.codecogs.com/gif.latex?{\color{Red} \sigma} = R.M.S = \sqrt{\frac{1}{N-1}\sum^{N-1}_{i=0}(x_i - {\color{Orange} \mu})^{\color{Orange} 2}}" /> 
+    * <img src="https://render.githubusercontent.com/render/math?math=\large {\color{Red} P} \propto {\color{Orange} V^{{\color{Orange}2}}}" /> 
+    * <img src="https://render.githubusercontent.com/render/math?math=\LARGE {\color{Red} \sigma} = R.M.S = \sqrt{\frac{1}{N-1}\sum^{N-1}_{i=0}(x_i - {\color{Orange} \mu})^{\color{Orange} 2}}" /> 
     * 物理意義: 顯示單一個測量值(電壓)與平均值間可能偏差的程度(功率)
 * Variance 變異數
-    * <img src="https://latex.codecogs.com/gif.latex?{\color{Red} \sigma^{\color{Red}2}}$ = $\frac{1}{N-1}\sum^{N-1}_{i=0}(x_i - {\color{Orange} \mu})^{\color{Orange} 2}" /> 
+    * <img src="https://render.githubusercontent.com/render/math?math=\LARGE {\color{Red} \sigma^{\color{Red}2}}$ = $\frac{1}{N-1}\sum^{N-1}_{i=0}(x_i - {\color{Orange} \mu})^{\color{Orange} 2}" /> 
     * 物理意義: 描述訊號的波動範圍，表示訊號中交流分量的強弱，即交流訊號的平均功率
 * Signal ro Noise ratio (SNR)
-    * <img src="https://latex.codecogs.com/gif.latex?SNR = \frac{\mu}{\sigma}" /> 
+    * <img src="https://render.githubusercontent.com/render/math?math=\LARGE SNR = \frac{\mu}{\sigma}" /> 
 * Coefficient of Variation
-    * <img src="https://latex.codecogs.com/gif.latex?CV = \frac{\mu}{\sigma} \times 100" /> 
+    * <img src="https://render.githubusercontent.com/render/math?math=\LARGE CV = \frac{\mu}{\sigma} \times 100" /> 
 
 ### Implementation
 
@@ -86,7 +90,7 @@ ADC consists of **Sample/Hold** and **Quantizer** to convert analog to digital.
 
 ### Sampling theorem
 
-Reconstructing original analog signal from sample points, the sample rate must satisfy <img src="https://latex.codecogs.com/gif.latex?f_s \geq 2f_{max}" /> , also called Nyquist theorem.
+Reconstructing original analog signal from sample points, the sample rate must satisfy <img src="https://render.githubusercontent.com/render/math?math=\large f_s \geq 2f_{max}" /> , also called Nyquist theorem.
 
 
 
