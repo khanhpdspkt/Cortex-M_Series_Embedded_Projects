@@ -74,6 +74,9 @@ ADC consists of **Sample/Hold** and **Quantizer** to convert analog to digital.
 * Sample/Hold: convert independent variable of signal from continuous to discrete 
 * Quantizer: convert dependent variable of signal from continuous to discrete
 
+### Sampling theorem
+
+Reconstructing original analog signal from sample points, the sample rate must satisfy $f_s \geq 2f_{max}$, also called Nyquist theorem.
 
 
 
