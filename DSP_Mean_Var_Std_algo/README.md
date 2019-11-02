@@ -4,10 +4,12 @@
 <img src="https://latex.codecogs.com/gif.latex?" /> 
 -->
 
+<img src="https://latex.codecogs.com/png.latex?\mu = \frac{1}{N}\sum^{N-1}_{i=0}x_i = \frac{x_0 + x_1 + \dots + x_{N-1}}{N}" /> 
+
 ## Mean and Standard Deviation
 
 * Mead 平均數
-    * <img src="https://latex.codecogs.com/svg.latex?\mu = \frac{1}{N}\sum^{N-1}_{i=0}x_i = \frac{x_0 + x_1 + \dots + x_{N-1}}{N}" /> 
+    * <img src="https://latex.codecogs.com/png.latex?\mu = \frac{1}{N}\sum^{N-1}_{i=0}x_i = \frac{x_0 + x_1 + \dots + x_{N-1}}{N}" /> 
     * 物理意義: DC signal (Direct current) 直流分量
 * Deviation
     * <img src="https://latex.codecogs.com/gif.latex?i" />  deviates from the mean: <img src="https://latex.codecogs.com/gif.latex?|x_i - \mu|" /> 
