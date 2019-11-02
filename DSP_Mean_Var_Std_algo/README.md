@@ -61,15 +61,18 @@ float32_t signal_standard_deviation (float32_t signal_variance) {
 > CMSIS為DSP應用處理數值(多使用`float32_t`等浮點數)，並最佳化，例如用迴圈做320樣本點`float32_t`訊號做平均數計算常常無法算出，使用函式庫則能做高效率的運算。
 
 
-## ARM Math APIs
+### ARM Math APIs
 
 * `arm_mean_f32`
 * `arm_var_f32`
 * `arm_std_f32`
 
 
+## ADC
 
-
+ADC consists of **Sample/Hold** and **Quantizer** to convert analog to digital.
+* Sample/Hold: convert independent variable of signal from continuous to discrete 
+* Quantizer: convert dependent variable of signal from continuous to discrete
 
 
 
