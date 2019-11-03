@@ -1,0 +1,4 @@
+load STM32F411RETx 
+project name STCubeGenerated 
+project toolchain "MDK-ARM V5" 
+project path "D:\STM32SW_workspace\DSP_Convolution\RTE\Device\STM32F411RETx\" 
