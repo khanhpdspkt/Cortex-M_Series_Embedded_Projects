@@ -1,4 +1,4 @@
-# Signal Statistics and Noise
+# Signal Statistics and CMSIS-DSP
 
 <!-- 
 <img src="https://latex.codecogs.com/gif.latex?" /> 
