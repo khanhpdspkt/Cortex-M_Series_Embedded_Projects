@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\stm32_dsp.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\stm32_dsp.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Nov 03 21:50:39 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Nov 03 21:56:32 2019
 <BR><P>
 <H3>Maximum Stack Usage =        176 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -659,8 +659,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 
-<P><STRONG><a name="[71]"></a>calc_first_difference</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, main.o(i.calc_first_difference))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = calc_first_difference
+<P><STRONG><a name="[71]"></a>calc_running_sum</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, main.o(i.calc_running_sum))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = calc_running_sum
 </UL>
 <BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -672,7 +672,7 @@ Global Symbols
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetHCLKFreq
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;plot_IO
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_first_difference
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_running_sum
 </UL>
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
