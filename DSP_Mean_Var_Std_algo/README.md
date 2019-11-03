@@ -72,7 +72,30 @@ float32_t signal_standard_deviation (float32_t signal_variance) {
 ```
 
 
-> CMSIS為DSP應用處理數值(多使用`float32_t`等浮點數)，並最佳化，例如用迴圈做320樣本點`float32_t`訊號做平均數計算常常無法算出，使用函式庫則能做高效率的運算。
+## CMSIS-DSP
+
+CMSIS為DSP應用處理數值(多使用`float32_t`等浮點數)，並最佳化，例如用迴圈做320樣本點`float32_t`訊號做平均數計算常常無法算出，使用函式庫則能做高效率的運算。包含以下幾種類別的運算
+* Basic math
+* Filter 
+* Thransform
+* Interpolation
+* Complex math
+* Control (PID)
+* Fast math 
+* Statistical
+* Matrix
+* Support function (min. max, ...)
+
+### Data type
+
+1. Signed integers
+    * `int8_t`, `int16_t`, `int32_t`, `int64_t`
+2. Unsigned integers
+    * `uint8_t`, `uint16_t`, `uint32_t`, `uint64_t`
+3. Floating point
+    * `float32_t`, `float64_t`
+4. Fraction
+    * `q7_t` (8-bit), `q15_t` (16-bit), `q31_t` (32-bit), `q63_t` (64-bit)
 
 
 ### ARM Math APIs
@@ -91,6 +114,73 @@ ADC consists of **Sample/Hold** and **Quantizer** to convert analog to digital.
 ### Sampling theorem
 
 Reconstructing original analog signal from sample points, the sample rate must satisfy <img src="https://render.githubusercontent.com/render/math?math=\large f_s \geq 2f_{max}" /> , also called Nyquist theorem.
+
+
+
+
+
+## RC Passive Filter
+
+> Filter circuit is created by passive components such as capacitor, inductor and resistor.
+
+* Design RC value
+   * 大川電子設計 online tool: http://sim.okawa-denshi.jp/en/Fkeisan.htm
+* Capacitor
+    * Short circuit in high freq
+    * Open circuit in low freq
+* Cut-off frequency 截止頻率
+    * <img src="https://render.githubusercontent.com/render/math?math=\large f_{c} = \frac{1}{2 \pi RC}" />
+
+
+
+#### Low pass 
+
+![](https://i.imgur.com/x78F13J.png)
+
+
+
+
+#### High pass 
+
+![](https://i.imgur.com/nBDOCG1.png)
+
+
+### Sallen-Key High-pass Filter 
+
+![](https://i.imgur.com/huHZH9t.png)
+
+
+(source: http://sim.okawa-denshi.jp/)
+* Details: https://www.electronics-tutorials.ws/filter/sallen-key-filter.html
+* More components (both passive and active components) means ploes and zeros, could achieve better performance.
+
+ 
+
+## Analog filter
+
+Three common filter used for DSP application
+
+1. Bessel filter
+    * Better step response
+3. Chebyshev filter
+    * Better frequency response
+5. Butterworth filter
+
+## Information encoding
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
