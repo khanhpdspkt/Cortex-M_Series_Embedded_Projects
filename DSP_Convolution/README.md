@@ -67,6 +67,48 @@ Better way is using CMSIS-DSP apis to calculate precisely.
 ![](https://i.imgur.com/s0zivLo.png)
 
 
+## Running sum 
+
+* [DSP_Running_Sum](https://github.com/syokujinau/Cortex-M_Series_Embedded_Projects/tree/master/DSP_Running_Sum)
+
+![](https://i.imgur.com/yP0CsFS.png)
+
+
+
+```c
+void calc_running_sum(float32_t* sig_src, float32_t* sig_dest, uint32_t sig_length) {
+	int i;
+	sig_dest[0] = sig_src[0];
+	for(i = 1; i < sig_length; i++) {
+		sig_dest[i] = sig_dest[i - 1] + sig_src[i];
+	}
+}
+```
+
+## First difference
+
+* [DSP_First_Difference](https://github.com/syokujinau/Cortex-M_Series_Embedded_Projects/tree/master/DSP_First_Difference)
+
+![](https://i.imgur.com/Dug8Qpv.png)
+
+
+```c
+void calc_first_difference(float32_t* sig_src, float32_t* sig_dest, uint32_t sig_length) {
+	sig_dest[0] = 0;
+	int i;
+	for(i = 1; i < sig_length; i++) {
+		sig_dest[i] = sig_src[i] + sig_src[i - 1];
+	}
+}
+```
+
+
+
+
+
+
+
+
 
 
 
