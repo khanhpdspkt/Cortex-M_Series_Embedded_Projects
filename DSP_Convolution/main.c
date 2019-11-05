@@ -97,7 +97,7 @@ void convolution(
 	uint32_t  imp_resp_length
 	) {
 	uint32_t i, j;
-	// initailze
+	// initialize
 	memset(sig_dest, 0, (sig_src_length + imp_resp_length)*sizeof(float32_t));
 
 	//
