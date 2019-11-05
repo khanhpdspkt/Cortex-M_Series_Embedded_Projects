@@ -84,8 +84,7 @@ void calc_sig_dft(
 
             sig_dest_ReX[k] += sig_src[n] * cos(2*PI*k*n / sig_src_length);
             sig_dest_ImX[k] -= sig_src[n] * sin(2*PI*k*n / sig_src_length);
-						
-					  for(int j = 0; j < 5000; j++) {}
+
         }
 
     }
