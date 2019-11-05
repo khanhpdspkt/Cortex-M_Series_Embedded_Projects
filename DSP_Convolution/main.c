@@ -90,12 +90,12 @@ void plot_impluse_response(void) {
 
 // 3. 
 void convolution(
-	float32_t *sig_src,
-	float32_t *sig_dest,
-	float32_t *imp_resp,
-	uint32_t  sig_src_length,
-	uint32_t  imp_resp_length
-	) {
+	float32_t *sig_src,         // [in]
+	float32_t *sig_dest,        // [out]
+	float32_t *imp_resp,        // [in]
+	uint32_t  sig_src_length,   // [in]
+	uint32_t  imp_resp_length   // [in]
+) {
 	uint32_t i, j;
 	// initialize
 	memset(sig_dest, 0, (sig_src_length + imp_resp_length)*sizeof(float32_t));
