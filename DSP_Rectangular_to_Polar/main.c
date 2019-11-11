@@ -2,43 +2,33 @@
 #include "arm_math.h"                   // ARM::CMSIS:DSP
 
 #define	SIGNAL_LEN       200
-#define	ECG_LENGTH       640
+
 
 // signals
 extern void SystemClock_Config(void);
 extern float32_t inputSignal_f32_1kHz_15kHz[SIGNAL_LEN];
-extern float32_t _640_points_ecg_[ECG_LENGTH];
 
-// float32_t output_signal_ReX[SIGNAL_LEN / 2];
-// float32_t output_signal_ImX[SIGNAL_LEN / 2];
 
-float32_t ecg_ReX[ECG_LENGTH / 2];
-float32_t ecg_ImX[ECG_LENGTH / 2];
-
-float32_t idft_output_sig[ECG_LENGTH];
+float32_t output_signal_ReX[SIGNAL_LEN / 2];
+float32_t output_signal_ImX[SIGNAL_LEN / 2];
+float32_t output_signal_Meg[SIGNAL_LEN / 2];
+float32_t output_signal_Pha[SIGNAL_LEN / 2];
 
 
 // prototypes
-void plot_ecg_signal(void);
-void plot_ecg_rex_signal(void);
-void get_ecg_dft_output_mag(void);
-void plot_ecg_idft_signal(void);
-void plot_original_sig_and_idft_sig(void);
+void plot_input_signal(void);
 
 // placeholder
-float32_t ecgSample;
-float32_t ecg_rexSample;
-float32_t idft_output_ecgSample;
+float32_t inputSample;
 
 
 void calc_sig_dft(float32_t* sig_src, float32_t* sig_dest_ReX, float32_t* sig_dest_ImX, uint32_t sig_src_length);
 void calc_sig_idft(float32_t* idft_out, float32_t* sig_src_ReX, float32_t* sig_src_ImX, uint32_t idft_length);
-
-
+void rect_to_polar_conversion(float32_t* sig_src_ReX, float32_t* sig_src_ImX, float32_t* sig_out_Mag, float32_t* sig_out_Phase, uint32_t   sig_src_length);
+void rect_to_polar_conversion(float32_t* sig_src_ReX, float32_t* sig_src_ImX, float32_t* sig_out_Mag, float32_t* sig_out_Phase,uint32_t   sig_src_length);
 
 uint32_t freq;
 
-uint32_t addr1, addr2;
 
 int main() {
 	
@@ -50,27 +40,26 @@ int main() {
 
 
 	calc_sig_dft(
-		(float32_t*) _640_points_ecg_, // [in]
-		(float32_t*) ecg_ReX,          // [out]
-		(float32_t*) ecg_ImX,          // [out]
-		(uint32_t)   ECG_LENGTH        // [in]
+		(float32_t*) inputSignal_f32_1kHz_15kHz, // [in]
+		(float32_t*) output_signal_ReX,          // [out]
+		(float32_t*) output_signal_ImX,          // [out]
+		(uint32_t)   SIGNAL_LEN                  // [in]
 	);
 	
-	calc_sig_idft(
-		(float32_t*) idft_output_sig, 
-		(float32_t*) ecg_ReX, 
-		(float32_t*) ecg_ImX, 
-		(uint32_t)   ECG_LENGTH
+	rect_to_polar_conversion( 
+		(float32_t*) output_signal_ReX,     // [in]
+		(float32_t*) output_signal_ImX,     // [in]
+		(float32_t*) output_signal_Meg,     // [out]
+		(float32_t*) output_signal_Pha,     // [out]
+		(uint32_t)   SIGNAL_LEN             // [in]
 	);
-
-	// get_ecg_dft_output_mag();
-	// plot_ecg_rex_signal();
-	plot_original_sig_and_idft_sig();
 
 
 	while(1){}
 		
 }
+
+
 
 
 // 1.
@@ -136,58 +125,57 @@ void calc_sig_dft(
 
 
 // 3.
-void get_ecg_dft_output_mag(void) {
-
-	for(int k = 0; k < (ECG_LENGTH / 2); k++){
-		ecg_ReX[k] = fabs(ecg_ReX[k]);
+void plot_input_signal() {
+	for(int i = 0; i < SIGNAL_LEN; i++) {
+		inputSample = inputSignal_f32_1kHz_15kHz[i];
+		for(int j = 0; j < 3000; j++) {}
 	}
-
 }
 
 // 4.
-void plot_ecg_signal(void) {
+void rect_to_polar_conversion( 
+	float32_t* sig_src_ReX,     // [in]
+	float32_t* sig_src_ImX,     // [in]
+	float32_t* sig_out_Mag,     // [out]
+	float32_t* sig_out_Phase,   // [out]
+	uint32_t   sig_src_length   // [in]
+){
+	
+	for(int k = 0; k < sig_src_length; k++) {
 
-	for(int i = 0; i < ECG_LENGTH; i++)	{
-		ecgSample = _640_points_ecg_[i];
-		for(int j = 0; j < 3000; j++){}
-			if(i == ECG_LENGTH - 1) i=0;
+		sig_out_Mag[k] = sqrt(powf(sig_src_ReX[k], 2) + powf(sig_src_ImX[k], 2));
+
+		if(sig_src_ReX[k] == 0) 
+			sig_src_ReX[k] = pow(10, -20);
+
+		sig_out_Phase[k] = atan(sig_src_ImX[k] / sig_src_ReX[k]);
+
+		if((sig_src_ReX[k] < 0) && (sig_src_ImX[k] < 0)) 
+			sig_out_Phase[k] -= PI;
+
+		if((sig_src_ReX[k] < 0) && (sig_src_ImX[k] >= 0)) 
+			sig_out_Phase[k] += PI;
+
 	}
-
+	
 }
 
 // 5.
-void plot_ecg_idft_signal(void) {
+void polar_to_rect_conversion( 
+	float32_t* sig_out_ReX,     // [out]
+	float32_t* sig_out_ImX,     // [out]
+	float32_t* sig_src_Mag,     // [in]
+	float32_t* sig_src_Phase,   // [in]
+	uint32_t   sig_src_length   // [in]
+){
 	
-	for(int i = 0; i < ECG_LENGTH; i++)	{
-		idft_output_ecgSample  = idft_output_sig[i];
-		for(int j = 0; j < 6000; j++){}
-			if(i == ECG_LENGTH - 1) i = 0;
+	for(int k = 0; k < sig_src_length; k++) {
+
+		sig_out_ReX[k] = sig_src_Mag[k] * cosf(sig_src_Phase[k]);
+		sig_out_ImX[k] = sig_src_Mag[k] * sinf(sig_src_Phase[k]);
 	}
+	
 }
-
-// 6.
-void plot_original_sig_and_idft_sig(void) {
-
-	for(int i = 0; i < ECG_LENGTH; i++)	{
-		idft_output_ecgSample  = idft_output_sig[i];
-		ecgSample  = _640_points_ecg_[i];
-
-		for(int j = 0; j < 6000; j++){}
-			if(i == ECG_LENGTH - 1) i = 0;
-	}
-}
-
-// 7.
-void plot_ecg_rex_signal(void) {
-
-	for(int i = 0; i < (ECG_LENGTH / 2); i++) {
-		ecg_rexSample = ecg_ReX[i];
-		for(int j = 0; j < 5000; j++){}
-	}
-}
-
-
-
 
 
 
