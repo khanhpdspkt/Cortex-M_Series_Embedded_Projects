@@ -18,7 +18,7 @@ float32_t outputSample;
 void plot_input_signal(void);
 void plot_IO(void);
 void moving_average(float32_t* sig_src, float32_t* sig_dest, uint32_t  signal_length, uint32_t filter_points);
-
+void recursive_moving_average(float32_t* sig_src, float32_t* sig_dest, uint32_t  signal_length, uint32_t filter_points);
 
 
 int main() {
@@ -29,7 +29,7 @@ int main() {
 	
 	
 	// plot_input_signal();
-	moving_average(
+	recursive_moving_average(
 		(float32_t*) inputSignal_f32_1kHz_15kHz,
 		(float32_t*) output_signal,
 		(uint32_t)   SIGNAL_LEN,
@@ -51,12 +51,12 @@ void moving_average(
 	uint32_t   signal_length, // [in]
 	uint32_t   filter_points  // [in]
 ) {
-	int i, j;
-	for(i = floor(filter_points / 2); i < (signal_length - (filter_points / 2)) - 1; i++) {
+
+	for(int i = floor(filter_points / 2); i < (signal_length - (filter_points / 2)) - 1; i++) {
 
 		sig_dest[i] = 0;
 
-		for(j = -(floor(filter_points / 2)); j < floor(filter_points / 2); j++) {
+		for(int j = -(floor(filter_points / 2)); j < floor(filter_points / 2); j++) {
 			sig_dest[i] += sig_src[i + j];
 		}
 
@@ -65,8 +65,29 @@ void moving_average(
 
 }
 
-
 // 2.
+void recursive_moving_average(
+	float32_t* sig_src,       // [in]
+	float32_t* sig_dest,      // [out]
+	uint32_t   signal_length, // [in]
+	uint32_t   filter_points  // [in]
+) {
+
+	float64_t acc = 0;
+	for(int i = 0; i < filter_points - 1; i++) {
+		acc += sig_src[i];
+	}
+
+	sig_dest[(filter_points - 1) / 2] = acc / filter_points;
+
+	for(int i = ceil(filter_points / 2); i < (signal_length - (filter_points / 2)) - 1; i++) {
+		acc += sig_src[i + (filter_points - 1) / 2] - sig_src[i - ((uint8_t)ceil(filter_points / 2))];
+		sig_dest[i] = acc / filter_points;
+	}
+
+}
+
+// 3.
 void plot_input_signal(void) {
 	int i, j;
 	for(i = 0; i < SIGNAL_LEN; i++) {
@@ -75,7 +96,7 @@ void plot_input_signal(void) {
 	}
 }
 
-// 3.
+// 4.
 void plot_IO(void) {
 	int i, j;
 	for(i = 0; i < SIGNAL_LEN; i++) {
