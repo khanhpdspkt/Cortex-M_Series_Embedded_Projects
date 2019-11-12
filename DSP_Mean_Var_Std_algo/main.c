@@ -51,13 +51,6 @@ int main() {
 
 
 
-void SystemTickHandler(void) {
-	HAL_IncTick();
-	HAL_SYSTICK_IRQHandler();
-}
-
-
-
 
 
 void plot_input_signal(void) {
@@ -98,3 +91,10 @@ float32_t signal_standard_deviation (float32_t signal_variance) {
 	return std;
 }
 
+//////////////////// END
+
+void SysTick_Handler(void){
+	HAL_IncTick();
+	HAL_SYSTICK_IRQHandler();
+	
+}

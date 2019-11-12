@@ -6,20 +6,19 @@
 extern void SystemClock_Config(void);
 // sine wave
 extern float32_t inputSignal_f32_1kHz_15kHz[SIGNAL_LEN]; // calculate mean of this sine wave
+float32_t output_signal[SIGNAL_LEN];
 
 uint32_t freq;
 
 // placeholder
 float32_t inputSample;
-float32_t inputMean;
-float32_t inputVariance;
-float32_t inputStandardDeviation;
+float32_t outputSample;
 
 // prototype
 void plot_input_signal(void);
-float32_t signal_mean(float32_t *signal_src, uint32_t signal_length);
-float32_t signal_variance(float32_t *signal_src, uint32_t signal_length, float32_t signal_mean);
-float32_t signal_standard_deviation (float32_t signal_variance);
+void plot_IO(void);
+void moving_average(float32_t* sig_src, float32_t* sig_dest, uint32_t  signal_length, uint32_t filter_points);
+
 
 
 int main() {
@@ -28,22 +27,16 @@ int main() {
 	SystemClock_Config();
 	freq = HAL_RCC_GetHCLKFreq();
 	
-	//
+	
 	// plot_input_signal();
+	moving_average(
+		(float32_t*) inputSignal_f32_1kHz_15kHz,
+		(float32_t*) output_signal,
+		(uint32_t)   SIGNAL_LEN,
+		(uint32_t)   11
+	);
 	
-	/* Mean */
-	// inputMean = signal_mean((float32_t *)&inputSignal_f32_1kHz_15kHz[0], (uint32_t)SIGNAL_LEN); // type casting for readability
-	// ARM API
-	arm_mean_f32(inputSignal_f32_1kHz_15kHz, SIGNAL_LEN, &inputMean);
-  // [Note] &inputSignal_f32_1kHz_15kHz[0] and inputSignal_f32_1kHz_15kHz are the same address.
-	
-	/* Variance */
-	// inputVariance = signal_variance((float32_t *)inputSignal_f32_1kHz_15kHz, (uint32_t) SIGNAL_LEN, (float32_t) inputMean); // type casting for readability
-	arm_var_f32(inputSignal_f32_1kHz_15kHz, SIGNAL_LEN, &inputVariance);
-	
-	/* Standard Deviation */
-	// inputStandardDeviation = signal_standard_deviation(inputVariance);
-	arm_std_f32(inputSignal_f32_1kHz_15kHz, SIGNAL_LEN, &inputStandardDeviation);
+	plot_IO();
 	
 	while(1) {}
 }
@@ -51,15 +44,29 @@ int main() {
 
 
 
-void SystemTickHandler(void) {
-	HAL_IncTick();
-	HAL_SYSTICK_IRQHandler();
+// 1. 
+void moving_average(
+	float32_t* sig_src,       // [in]
+	float32_t* sig_dest,      // [out]
+	uint32_t   signal_length, // [in]
+	uint32_t   filter_points  // [in]
+) {
+	int i, j;
+	for(i = floor(filter_points / 2); i < (signal_length - (filter_points / 2)) - 1; i++) {
+
+		sig_dest[i] = 0;
+
+		for(j = -(floor(filter_points / 2)); j < floor(filter_points / 2); j++) {
+			sig_dest[i] += sig_src[i + j];
+		}
+
+		sig_dest[i] /= filter_points; 
+	}
+
 }
 
 
-
-
-
+// 2.
 void plot_input_signal(void) {
 	int i, j;
 	for(i = 0; i < SIGNAL_LEN; i++) {
@@ -68,33 +75,22 @@ void plot_input_signal(void) {
 	}
 }
 
-// use loop the calculate mean of signal, better way is using arm_mean_f32 
-float32_t signal_mean(float32_t *signal_src, uint32_t signal_length) {
-	float32_t mean = 0.0;
-	uint32_t i;
-	for(i = 0; i < signal_length; i++) {
-		mean = mean + signal_src[i];
+// 3.
+void plot_IO(void) {
+	int i, j;
+	for(i = 0; i < SIGNAL_LEN; i++) {
+		inputSample = inputSignal_f32_1kHz_15kHz[i];
+		outputSample = output_signal[i];
+		for(j = 0; j < 3000; j++) {}
 	}
-	mean /= (float32_t)signal_length;
-	
-	return mean;
 }
 
-float32_t signal_variance(float32_t *signal_src, uint32_t signal_length, float32_t signal_mean) {
-	
-	float32_t variance = 0.0;
-	uint32_t i;
-	for(i = 0; i < signal_length; i++) {
-		variance = variance + pow((signal_src[i] - signal_mean), 2);
-	}
-	variance /= (signal_length - 1);
-	
-	return variance;
-}
 
-float32_t signal_standard_deviation (float32_t signal_variance) {
-	float32_t std = sqrtf(signal_variance);
+//////////////////// END
+
+void SysTick_Handler(void){
+	HAL_IncTick();
+	HAL_SYSTICK_IRQHandler();
 	
-	return std;
 }
 
